@@ -1,0 +1,6 @@
+2022-06-30 19:30:31.863  INFO 17648 --- [main] com.business.ad.AdApplicationKt          : Starting AdApplicationKt using Java 11.0.15 on DESKTOP-4VRCPN9 with PID 17648 (C:\Users\LEE\IdeaProjects\ad\build\classes\kotlin\main started by LEE in C:\Users\LEE\IdeaProjects\ad)
+2022-06-30 19:30:31.864  INFO 17648 --- [main] com.business.ad.AdApplicationKt          : The following 2 profiles are active: "local", "file-logging"
+2022-06-30 19:30:32.223  INFO 17648 --- [main] com.business.ad.AdApplicationKt          : Started AdApplicationKt in 0.748 seconds (JVM running for 1.421)
+2022-06-30 19:30:32.226  INFO 17648 --- [main] com.business.ad.AdApplication            : I'm info! Hello world.
+2022-06-30 19:30:32.226  WARN 17648 --- [main] com.business.ad.AdApplication            : I'm warn! Hello world.
+2022-06-30 19:30:32.227 ERROR 17648 --- [main] com.business.ad.AdApplication            : I'm error! Hello world.

@@ -1,0 +1,29 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: "jdbc:mysql://localhost:3306/business"
+    username: "root"
+    password: "root"
+  jpa:
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+datasource:
+  url: "jdbc:mysql://somewhere-dev-host:3306/business"
+  username: "username"
+  password: "password"
+  jpa:
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    show-sql: true
