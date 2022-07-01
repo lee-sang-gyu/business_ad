@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.PathVariable
 
+//서비스: 광고주 정보
 @Component
 class AdvertiserService {
 
@@ -19,53 +20,50 @@ class AdvertiserService {
         return advertiser.map { it.toReadAdvertiserDTO() }
     }
 
+    //광고주 생성
     @Transactional
     fun createAdvertiser(createAdvertiserDTO: CreateAdvertiserDTO): CreateAdvertiserDTO {
         val advertiser = advertiserRepository.save(createAdvertiserDTO.toEnitty())
-        return  advertiser.toCreateAdvertiserDTO()
+        return advertiser.toCreateAdvertiserDTO()
     }
 
+    //광고주 조회
     fun getAdvertiserById(@PathVariable(value = "id") advertiserId: Long): ReadAdvertiserDTO {
         val advertiser = advertiserRepository.findById(advertiserId)
 
         return if (advertiser.isEmpty) {
-            ReadAdvertiserDTO(advertiserId,"")
+            ReadAdvertiserDTO(advertiserId, "")
         } else {
             advertiser.get().toReadAdvertiserDTO()
         }
     }
 
-    fun updateAdvertiserById(@PathVariable(value = "id") advertiserId: Long,
-                             createAdvertiserDTO: CreateAdvertiserDTO
+    //광고주 변경
+    fun updateAdvertiserById(
+        @PathVariable(value = "id") advertiserId: Long,
+        createAdvertiserDTO: CreateAdvertiserDTO
     ): String {
         val existingAdvertiser = advertiserRepository.findById(advertiserId)
-        var updatedAdvertiser = existingAdvertiser.get().copy(name = createAdvertiserDTO.name)
-        val advertiser = advertiserRepository.save(updatedAdvertiser.toCreateAdvertiserDTO().toEnitty())
+
         return if (existingAdvertiser.isEmpty) {
             "없는 아이디입니다."
         } else {
+            var updatedAdvertiser = existingAdvertiser.get().copy(name = createAdvertiserDTO.name)
+            val advertiser = advertiserRepository.save(updatedAdvertiser.toCreateAdvertiserDTO().toEnitty())
             advertiser.name
         }
     }
-    /*@DeleteMapping("/advertiser/{id}")
-    fun deleteAdvertiserById(@PathVariable(value = "id") advertiserId: Long): ResponseEntity<Void> {
 
-        return advertiserRepository.findById(advertiserId).map { advertiser ->
-            advertiserRepository.delete(advertiser)
-            ResponseEntity<Void>(HttpStatus.OK)
-        }.orElse(ResponseEntity.notFound().build())
-
-    }*/
+    //광고주 삭제
     fun deleteAdvertiserById(@PathVariable(value = "id") advertiserId: Long): Boolean {
-
         val advertiser = advertiserRepository.findById(advertiserId)
-        advertiser.map { deleteAdv -> advertiserRepository.delete(deleteAdv) }
+        return if (advertiser.isEmpty) {
+            return false
+        } else {
+            advertiser.map { deleteAdv -> advertiserRepository.delete(deleteAdv) }
 
-        val checkAdv = advertiserRepository.findById(advertiserId)
-        return checkAdv.isEmpty
-       /* return advertiserRepository.findById(advertiserId).map { advertiser ->
-            advertiserRepository.delete(advertiser)
-            ResponseEntity<Void>(HttpStatus.OK)
-        }.orElse(ResponseEntity.notFound().build())*/
+            val checkAdv = advertiserRepository.findById(advertiserId)
+            return checkAdv.isEmpty
+        }
     }
 }

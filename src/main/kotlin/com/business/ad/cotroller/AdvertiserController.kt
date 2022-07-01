@@ -1,18 +1,13 @@
 package com.business.ad.cotroller
 
-import com.business.ad.model.Advertiser
 import com.business.ad.dto.CreateAdvertiserDTO
 import com.business.ad.dto.ReadAdvertiserDTO
 import com.business.ad.service.AdvertiserService
-import com.business.ad.repository.AdvertiserRepository
 import org.springframework.beans.factory.annotation.Autowired
-
-
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import javax.validation.Valid
 
+//컨트롤러: 광고주 정보
 @RestController
 @RequestMapping("/api")
 class AdvertiserController {
@@ -31,12 +26,14 @@ class AdvertiserController {
         return ResponseEntity.ok().body(true)
     }
 
+    //조회
     @GetMapping("/advertiser/{id}")
     fun getAdvertiserById(@PathVariable(value = "id") advertiserId: Long)
             : ResponseEntity<ReadAdvertiserDTO> {
         return ResponseEntity.ok().body(advertiserService.getAdvertiserById(advertiserId))
     }
 
+    //변경
     @PutMapping("/advertiser/{id}")
     fun updateAdvertiserById(
         @PathVariable(value = "id") advertiserId: Long,
@@ -45,6 +42,7 @@ class AdvertiserController {
         return ResponseEntity.ok().body(advertiserService.updateAdvertiserById(advertiserId, updateAdvertiser))
     }
 
+    //삭제
     @DeleteMapping("/advertiser/{id}")
     fun deleteAdvertiserById(@PathVariable(value = "id") advertiserId: Long)
             : ResponseEntity<Any> {

@@ -38,6 +38,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     runtimeOnly("mysql:mysql-connector-java") // MySQL
     implementation ("org.springframework.boot:spring-boot-starter-validation")
+    developmentOnly ("org.springframework.boot:spring-boot-devtools")
 }
 
 tasks.withType<KotlinCompile> {
