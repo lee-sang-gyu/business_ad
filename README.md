@@ -1,4 +1,8 @@
-# API Spec
+# API 목록
+-URL	
+-HOST	
+-METHOD	
+-기능
 
 ## Create Advertiser
 
