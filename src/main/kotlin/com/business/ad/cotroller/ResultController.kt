@@ -1,6 +1,7 @@
 package com.business.ad.cotroller
 
 import com.business.ad.dto.CreateResultDTO
+import com.business.ad.dto.ReadResultDTO
 import com.business.ad.service.ResultService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -17,6 +18,27 @@ class ResultController {
     @GetMapping("/result")
     fun getAllResult(): ResponseEntity<Any> {
         return ResponseEntity.ok().body(resultService.getResult())
+    }
+
+    //모든 캠페인 결과 조회: 캠페인 정보 포함
+    @GetMapping("/result_total")
+    fun getAllResultJoinCampaign(): ResponseEntity<Any> {
+        return ResponseEntity.ok().body(resultService.getResultJoinCampaign())
+    }
+
+    //Id로 조회
+    @GetMapping("/result/{id}")
+    fun getResultById(@PathVariable(value = "id") resultId: Long)
+            : ResponseEntity<ReadResultDTO> {
+        return ResponseEntity.ok().body(resultService.getResultById(resultId))
+    }
+
+    //캠페인 결과 Id로 조회: 캠페인 정보 포함
+    @GetMapping("/result_total/{id}")
+    fun getResultJoinCampaignById(
+        @PathVariable(value = "id") resultId: Long
+    ): ResponseEntity<Any> {
+        return ResponseEntity.ok().body(resultService.getResultJoinCampaignById(resultId))
     }
 
     //캠페인 결과 생성

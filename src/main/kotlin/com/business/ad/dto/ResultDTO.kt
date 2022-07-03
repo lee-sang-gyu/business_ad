@@ -1,7 +1,6 @@
 package com.business.ad.dto
 
 import com.business.ad.model.Result
-import java.util.*
 
 //DTO: 켐페인 결과
 data class ReadResultDTO(
@@ -26,3 +25,11 @@ data class CreateResultDTO(
         )
     }
 }
+
+data class ReadResultJoinCampaignDTO(
+    val id: Long? = null,
+    val campaignid: Long,
+    val cliks: Int?,
+    val exposure: Int?,
+    var campaign: ReadCampaignJoinAdcDTO?
+)
