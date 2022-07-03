@@ -10,6 +10,7 @@ import com.business.ad.repository.CampaignRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.PathVariable
+import java.util.regex.Pattern
 
 //서비스: 캠페인 정보
 @Component
@@ -48,18 +49,22 @@ class CampaignService {
         val campaignList = mutableListOf<ReadCampaignJoinAdDTO>()
         campaign.forEach {
             //광고주
-            val arr_adv_id = it.advertiser_id.split("/")
+            val arr_adv_id = Pattern.compile("/").split(it.advertiserid)
             val arr_long_adv_id = mutableListOf<Long>()
             if (arr_adv_id.get(0) != "") {
-                arr_adv_id.forEach { arr_long_adv_id.add(it.toLong()) }
+                arr_adv_id.forEach {
+                    arr_long_adv_id.add(it.replace("$","").toLong())
+                }
             }
-            val advertiser = advertiserRepository.findByIdIn(arr_long_adv_id)
             //광고 내용
-            val arr_adc_id = it.adcontent_id.split("/")
+            val arr_adc_id = Pattern.compile("/").split(it.adcontentid)
             val arr_long_adc_id = mutableListOf<Long>()
             if (arr_adc_id.get(0) != "") {
-                arr_adc_id.forEach { arr_long_adc_id.add(it.toLong()) }
+                arr_adc_id.forEach {
+                    arr_long_adc_id.add(it.replace("$","").toLong())
+                }
             }
+            val advertiser = advertiserRepository.findByIdIn(arr_long_adv_id)
             val adcontent = adcontentRepository.findByIdIn(arr_long_adc_id)
             campaignList.add(convertCampaignResponse(it, advertiser, adcontent))
         }
@@ -73,17 +78,21 @@ class CampaignService {
 
         val campaign = campaignRepository.findById(campaignId)
         //광고주
-        val arr_adv_id = campaign.get().advertiser_id.split("/")
+        val arr_adv_id = Pattern.compile("/").split(campaign.get().advertiserid)
         val arr_long_adv_id = mutableListOf<Long>()
         if (arr_adv_id.get(0) != "") {
-            arr_adv_id.forEach { arr_long_adv_id.add(it.toLong()) }
+            arr_adv_id.forEach {
+                arr_long_adv_id.add(it.replace("$","").toLong())
+            }
         }
         val advertiser = advertiserRepository.findByIdIn(arr_long_adv_id)
         //광고 내용
-        val arr_adc_id = campaign.get().adcontent_id.split("/")
+        val arr_adc_id = Pattern.compile("/").split(campaign.get().adcontentid)
         val arr_long_adc_id = mutableListOf<Long>()
         if (arr_adc_id.get(0) != "") {
-            arr_adc_id.forEach { arr_long_adc_id.add(it.toLong()) }
+            arr_adc_id.forEach {
+                arr_long_adc_id.add(it.replace("$","").toLong())
+            }
         }
         val adcontent = adcontentRepository.findByIdIn(arr_long_adc_id)
         return convertCampaignResponse(campaign.get(), advertiser, adcontent)
@@ -113,8 +122,8 @@ class CampaignService {
                 start_date = createCampaignDTO.start_date,
                 end_date = createCampaignDTO.end_date,
                 subject_list = createCampaignDTO.subject_list,
-                advertiser_id = createCampaignDTO.advertiser_id,
-                adcontent_id = createCampaignDTO.adcontent_id
+                advertiserid = createCampaignDTO.advertiserid,
+                adcontentid = createCampaignDTO.adcontentid
             )
             val campaign = campaignRepository.save(updatedCampaign.toCreateCampaignDTO().toEnitty())
             campaign.toReadCampaignDTO()
@@ -135,6 +144,8 @@ class CampaignService {
         }
     }
 
+
+
     private fun convertCampaignResponse(
         campaign: Campaign,
         join_advertiser: List<Advertiser>,
@@ -146,9 +157,9 @@ class CampaignService {
             start_date = campaign.start_date,
             end_date = campaign.end_date,
             subject_list = campaign.subject_list,
-            advertiser_id = campaign.advertiser_id,
+            advertiserid = campaign.advertiserid,
             advertiser = join_advertiser,
-            adcontent_id = campaign.adcontent_id,
+            adcontentid = campaign.adcontentid,
             adcontent = join_adcontent
         )
     }

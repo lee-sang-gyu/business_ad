@@ -17,8 +17,8 @@ data class Campaign(
     var start_date: Date,
     var end_date: Date,
     var subject_list: Int,
-    var advertiser_id: String,
-    var adcontent_id: String
+    var advertiserid: String,
+    var adcontentid: String
 ) {
     fun toReadCampaignDTO(): ReadCampaignDTO {
         return ReadCampaignDTO(
@@ -27,8 +27,8 @@ data class Campaign(
             start_date = start_date,
             end_date = end_date,
             subject_list = subject_list,
-            advertiser_id = advertiser_id,
-            adcontent_id = adcontent_id
+            advertiserid = advertiserid,
+            adcontentid = adcontentid
         )
     }
 
@@ -39,8 +39,8 @@ data class Campaign(
             start_date = start_date,
             end_date = end_date,
             subject_list = subject_list,
-            advertiser_id = advertiser_id,
-            adcontent_id = adcontent_id
+            advertiserid = advertiserid,
+            adcontentid = adcontentid
         )
     }
 }

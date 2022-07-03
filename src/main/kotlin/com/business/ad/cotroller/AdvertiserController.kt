@@ -2,6 +2,7 @@ package com.business.ad.cotroller
 
 import com.business.ad.dto.CreateAdvertiserDTO
 import com.business.ad.dto.ReadAdvertiserDTO
+import com.business.ad.dto.ReadAdvertiserJoinCamapignDTO
 import com.business.ad.service.AdvertiserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -31,6 +32,12 @@ class AdvertiserController {
     fun getAdvertiserById(@PathVariable(value = "id") advertiserId: Long)
             : ResponseEntity<ReadAdvertiserDTO> {
         return ResponseEntity.ok().body(advertiserService.getAdvertiserById(advertiserId))
+    }
+    //조회: 캠페인정보 포함
+    @GetMapping("/advertiser/{id}/campaign")
+    fun getAdvertiserJoinCampaignById(@PathVariable(value = "id") advertiserId: Long)
+            : ResponseEntity<ReadAdvertiserJoinCamapignDTO> {
+        return ResponseEntity.ok().body(advertiserService.getAdvertiserJoinCampaignById(advertiserId))
     }
 
     //변경

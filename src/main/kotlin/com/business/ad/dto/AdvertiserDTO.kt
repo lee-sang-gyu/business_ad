@@ -1,7 +1,9 @@
 package com.business.ad.dto
 
+import com.business.ad.model.Adcontent
 import com.business.ad.model.Advertiser
 import com.business.ad.model.Campaign
+import java.util.*
 
 //DTO: 광고주 정보
 data class ReadAdvertiserDTO(
@@ -20,3 +22,9 @@ data class CreateAdvertiserDTO(
         )
     }
 }
+
+data class ReadAdvertiserJoinCamapignDTO(
+    val id: Long? = null,
+    val name: String,
+    val campaign: List<Campaign>
+)

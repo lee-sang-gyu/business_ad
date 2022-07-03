@@ -15,8 +15,8 @@ data class ReadCampaignDTO(
     val start_date: Date?,
     val end_date: Date?,
     val subject_list: Int?,
-    val advertiser_id: String?,
-    val adcontent_id: String?
+    val advertiserid: String?,
+    val adcontentid: String?
 )
 data class ReadCampaignJoinAdDTO(
     val id: Long? = null,
@@ -24,9 +24,9 @@ data class ReadCampaignJoinAdDTO(
     val start_date: Date?,
     val end_date: Date?,
     val subject_list: Int?,
-    val advertiser_id: String?,
+    val advertiserid: String?,
     var advertiser: List<Advertiser>?,
-    val adcontent_id: String?,
+    val adcontentid: String?,
     val adcontent: List<Adcontent>?
 )
 data class CreateCampaignDTO(
@@ -35,8 +35,8 @@ data class CreateCampaignDTO(
     val start_date: Date,
     val end_date: Date,
     val subject_list: Int,
-    val advertiser_id: String,
-    val adcontent_id: String
+    val advertiserid: String,
+    val adcontentid: String
 ) {
     fun toEnitty(): Campaign {
         return Campaign(
@@ -45,8 +45,8 @@ data class CreateCampaignDTO(
             start_date = start_date,
             end_date = end_date,
             subject_list = subject_list,
-            advertiser_id = advertiser_id,
-            adcontent_id = adcontent_id
+            advertiserid = advertiserid,
+            adcontentid = adcontentid
         )
     }
 }
