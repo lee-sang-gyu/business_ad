@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank
 //모델: 광고주 정보
 @Entity
 data class Advertiser(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     var id: Long = 0,
 
     @get: NotBlank
