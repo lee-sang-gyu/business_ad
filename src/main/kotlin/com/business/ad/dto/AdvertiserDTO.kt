@@ -1,6 +1,7 @@
 package com.business.ad.dto
 
 import com.business.ad.model.Advertiser
+import com.business.ad.model.Campaign
 
 //DTO: 광고주 정보
 data class ReadAdvertiserDTO(

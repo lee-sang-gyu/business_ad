@@ -9,8 +9,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
     generate-ddl: true
     show-sql: true
+
 
 ---
 
@@ -27,3 +29,4 @@ datasource:
       ddl-auto: update
     generate-ddl: true
     show-sql: true
+    format_sql: true

@@ -1,9 +1,7 @@
 package com.business.ad.cotroller
 
 import com.business.ad.dto.CreateAdcontentDTO
-import com.business.ad.dto.CreateAdvertiserDTO
 import com.business.ad.dto.ReadAdcontentDTO
-import com.business.ad.dto.ReadAdvertiserDTO
 import com.business.ad.service.AdcontentService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity

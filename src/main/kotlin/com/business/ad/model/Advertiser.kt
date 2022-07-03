@@ -2,20 +2,17 @@ package com.business.ad.model
 
 import com.business.ad.dto.CreateAdvertiserDTO
 import com.business.ad.dto.ReadAdvertiserDTO
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 import javax.validation.constraints.NotBlank
 
 //모델: 광고주 정보
 @Entity
 data class Advertiser(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
+    var id: Long = 0,
 
     @get: NotBlank
-    var name: String = "",
+    var name: String = ""
 ) {
     fun toReadAdvertiserDTO(): ReadAdvertiserDTO {
         return ReadAdvertiserDTO(

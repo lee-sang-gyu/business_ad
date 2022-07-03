@@ -1,6 +1,7 @@
 package com.business.ad.repository
 
 import com.business.ad.model.Adcontent
+import com.business.ad.model.Advertiser
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
@@ -10,4 +11,5 @@ interface AdcontentRepository : JpaRepository<Adcontent, Long?> {
 
     fun findAllBy(): List<Adcontent>
     fun findByContent(Content: String?): List<Adcontent>
+    fun findByIdIn(Id: List<Long>): List<Adcontent>
 }

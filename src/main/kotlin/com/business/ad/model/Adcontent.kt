@@ -13,6 +13,7 @@ data class Adcontent(
     var image_url: String,
     var btn_text: String,
     var btn_url: String
+
 ) {
     fun toReadAdcontentDTO(): ReadAdcontentDTO {
         return ReadAdcontentDTO(
