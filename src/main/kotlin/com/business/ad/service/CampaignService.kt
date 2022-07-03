@@ -53,7 +53,7 @@ class CampaignService {
             val arr_long_adv_id = mutableListOf<Long>()
             if (arr_adv_id.get(0) != "") {
                 arr_adv_id.forEach {
-                    arr_long_adv_id.add(it.replace("$","").toLong())
+                    arr_long_adv_id.add(it.replace("$", "").toLong())
                 }
             }
             //광고 내용
@@ -61,7 +61,7 @@ class CampaignService {
             val arr_long_adc_id = mutableListOf<Long>()
             if (arr_adc_id.get(0) != "") {
                 arr_adc_id.forEach {
-                    arr_long_adc_id.add(it.replace("$","").toLong())
+                    arr_long_adc_id.add(it.replace("$", "").toLong())
                 }
             }
             val advertiser = advertiserRepository.findByIdIn(arr_long_adv_id)
@@ -82,7 +82,7 @@ class CampaignService {
         val arr_long_adv_id = mutableListOf<Long>()
         if (arr_adv_id.get(0) != "") {
             arr_adv_id.forEach {
-                arr_long_adv_id.add(it.replace("$","").toLong())
+                arr_long_adv_id.add(it.replace("$", "").toLong())
             }
         }
         val advertiser = advertiserRepository.findByIdIn(arr_long_adv_id)
@@ -91,7 +91,7 @@ class CampaignService {
         val arr_long_adc_id = mutableListOf<Long>()
         if (arr_adc_id.get(0) != "") {
             arr_adc_id.forEach {
-                arr_long_adc_id.add(it.replace("$","").toLong())
+                arr_long_adc_id.add(it.replace("$", "").toLong())
             }
         }
         val adcontent = adcontentRepository.findByIdIn(arr_long_adc_id)
@@ -143,8 +143,6 @@ class CampaignService {
             return checkCampaign.isEmpty
         }
     }
-
-
 
     private fun convertCampaignResponse(
         campaign: Campaign,

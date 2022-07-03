@@ -17,6 +17,7 @@ class AdvertiserService {
 
     @Autowired
     lateinit var advertiserRepository: AdvertiserRepository
+
     @Autowired
     lateinit var campaignRepository: CampaignRepository
 
@@ -44,12 +45,13 @@ class AdvertiserService {
     }
 
     //광고주 조회: 캠페인 포함
-    fun getAdvertiserJoinCampaignById(@PathVariable(value = "id") advertiserId: Long
+    fun getAdvertiserJoinCampaignById(
+        @PathVariable(value = "id") advertiserId: Long
     ): ReadAdvertiserJoinCamapignDTO {
         val advertiser = advertiserRepository.findById(advertiserId)
         val like_adv: String = "%$" + advertiserId + "/%"
         val campaign = campaignRepository.findByAdvertiseridLike(like_adv)
-        return ReadAdvertiserJoinCamapignDTO(advertiser.get().id,advertiser.get().name,campaign)
+        return ReadAdvertiserJoinCamapignDTO(advertiser.get().id, advertiser.get().name, campaign)
     }
 
 

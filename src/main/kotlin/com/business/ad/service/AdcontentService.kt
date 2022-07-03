@@ -15,6 +15,7 @@ class AdcontentService {
     @Autowired
     lateinit var adcontentRepository: AdcontentRepository
 
+    //광고 내용 전체 조회
     fun getAdcontent(): List<ReadAdcontentDTO> {
         val adcontent = adcontentRepository.findAll()
         return adcontent.map { it.toReadAdcontentDTO() }

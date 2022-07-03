@@ -18,6 +18,7 @@ data class ReadCampaignDTO(
     val advertiserid: String?,
     val adcontentid: String?
 )
+
 data class ReadCampaignJoinAdDTO(
     val id: Long? = null,
     val name: String,
@@ -29,6 +30,7 @@ data class ReadCampaignJoinAdDTO(
     val adcontentid: String?,
     val adcontent: List<Adcontent>?
 )
+
 data class CreateCampaignDTO(
     val id: Long,
     val name: String,

@@ -33,6 +33,7 @@ class AdvertiserController {
             : ResponseEntity<ReadAdvertiserDTO> {
         return ResponseEntity.ok().body(advertiserService.getAdvertiserById(advertiserId))
     }
+
     //조회: 캠페인정보 포함
     @GetMapping("/advertiser/{id}/campaign")
     fun getAdvertiserJoinCampaignById(@PathVariable(value = "id") advertiserId: Long)
