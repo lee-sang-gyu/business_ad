@@ -17,6 +17,7 @@ class AdvertiserController {
         value = ["/advertiser"],
         produces = ["application/json"]
     )
+    //광고주 전체조회
     fun getAllAdvertiser(): WebResponse<List<ReadAdvertiserDTO>> {
         val Response = advertiserService.getAdvertisers()
         return WebResponse(

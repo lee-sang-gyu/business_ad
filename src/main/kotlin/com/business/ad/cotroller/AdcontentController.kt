@@ -2,6 +2,7 @@ package com.business.ad.cotroller
 
 import com.business.ad.dto.CreateAdcontentDTO
 import com.business.ad.dto.ReadAdcontentDTO
+import com.business.ad.model.WebResponse
 import com.business.ad.service.AdcontentService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -14,63 +15,131 @@ class AdcontentController {
     @Autowired
     private lateinit var adcontentService: AdcontentService
 
-    @GetMapping("/adcontent")
-    fun getAllAdcontent(): ResponseEntity<Any> {
-        return ResponseEntity.ok().body(adcontentService.getAdcontent())
+    //광고내용 전체 조회
+    @GetMapping(
+        value = ["/adcontent"],
+        produces = ["application/json"]
+    )
+    fun getAllAdcontent(): WebResponse<List<ReadAdcontentDTO>> {
+        val Response = adcontentService.getAdcontent()
+        return WebResponse(
+            code = 200,
+            status = "OK",
+            data = Response
+        )
     }
 
     //광고 내용 생성
-    @PostMapping("/adcontent")
+    @PostMapping(
+        value = ["/adcontent"],
+        produces = ["application/json"],
+        consumes = ["application/json"]
+    )
     fun createAdcontent(@RequestBody createAdcontentDTO: CreateAdcontentDTO)
-            : ResponseEntity<Any> {
-        adcontentService.createAdcontent(createAdcontentDTO)
-        return ResponseEntity.ok().body(true)
+            : WebResponse<CreateAdcontentDTO> {
+        val Response = adcontentService.createAdcontent(createAdcontentDTO)
+        return WebResponse(
+            code = 200,
+            status = "OK",
+            data = Response
+        )
     }
 
     //Id로 조회
-    @GetMapping("/adcontent/id/{id}")
+    @GetMapping(
+        value = ["/adcontent/id/{id}"],
+        produces = ["application/json"]
+    )
     fun getAdvertiserById(@PathVariable(value = "id") adcontentId: Long)
-            : ResponseEntity<ReadAdcontentDTO> {
-        return ResponseEntity.ok().body(adcontentService.getAdcontentById(adcontentId))
+            : WebResponse<ReadAdcontentDTO> {
+        val Response = adcontentService.getAdcontentById(adcontentId)
+        return WebResponse(
+            code = 200,
+            status = "OK",
+            data = Response
+        )
     }
 
     //Id로 변경
-    @PutMapping("/adcontent/id/{id}")
+    @PutMapping(
+        value = ["/adcontent/id/{id}"],
+        produces = ["application/json"],
+        consumes = ["application/json"]
+    )
     fun updateAdcontentById(
         @PathVariable(value = "id") adcontentId: Long,
         @RequestBody updateAdcontent: CreateAdcontentDTO
-    ): ResponseEntity<Any> {
-        return ResponseEntity.ok().body(adcontentService.updateAdcontentById(adcontentId, updateAdcontent))
+    ): WebResponse<ReadAdcontentDTO> {
+        val Response = adcontentService.updateAdcontentById(adcontentId, updateAdcontent)
+        return WebResponse(
+            code = 200,
+            status = "OK",
+            data = Response
+        )
     }
 
     //Id로 삭제
-    @DeleteMapping("/adcontent/id/{id}")
+    @DeleteMapping(
+        value = ["/adcontent/id/{id}"],
+        produces = ["application/json"]
+    )
     fun deleteAdcontentById(@PathVariable(value = "id") adcontentId: Long)
-            : ResponseEntity<Any> {
-        return ResponseEntity.ok().body(adcontentService.deleteAdcontentById(adcontentId))
+            : WebResponse<Long> {
+        adcontentService.deleteAdcontentById(adcontentId)
+        return WebResponse(
+            code = 200,
+            status = "OK",
+            data = adcontentId
+        )
     }
 
     //내용 항목으로 조회
-    @GetMapping("/adcontent/{content}")
+    @GetMapping(
+        value = ["/adcontent/{content}"],
+        produces = ["application/json"]
+    )
     fun getAdcontentByContent(@PathVariable(value = "content") adContent: String)
-            : ResponseEntity<Any> {
-        return ResponseEntity.ok().body(adcontentService.getAdcontentByContent(adContent))
+            : WebResponse<List<ReadAdcontentDTO>> {
+
+        val Response = adcontentService.getAdcontentByContent(adContent)
+        return WebResponse(
+            code = 200,
+            status = "OK",
+            data = Response
+        )
     }
 
-    //내용 항목으로 변경
-    @PutMapping("/adcontent/{content}")
+    //광고 내용 이름만 변경
+    @PutMapping(
+        value = ["/adcontent/{content}"],
+        produces = ["application/json"],
+        consumes = ["application/json"]
+    )
     fun updateOnlyContentByContent(
         @PathVariable(value = "content") adContent: String,
         @RequestBody updateAdcontent: ReadAdcontentDTO
-    ): ResponseEntity<Any> {
-        return ResponseEntity.ok().body(adcontentService.updateOnlyContentByContent(adContent, updateAdcontent))
+    ): WebResponse<List<ReadAdcontentDTO>> {
+        val Response = adcontentService.updateOnlyContentByContent(adContent, updateAdcontent)
+        return WebResponse(
+            code = 200,
+            status = "OK",
+            data = Response
+        )
     }
 
     //내용 항목으로 삭제
-    @DeleteMapping("/adcontent/{content}")
+    @DeleteMapping(
+            value = ["/adcontent/{content}"],
+        produces = ["application/json"]
+    )
     fun deleteOnlyContentByContent(
         @PathVariable(value = "content") adContent: String
-    ): ResponseEntity<Any> {
-        return ResponseEntity.ok().body(adcontentService.deleteOnlyContentByContent(adContent))
+    ): WebResponse<String> {
+        adcontentService.deleteOnlyContentByContent(adContent)
+        return WebResponse(
+            code = 200,
+            status = "OK",
+            data = adContent
+        )
     }
 }
