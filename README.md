@@ -276,4 +276,62 @@ Response :
         ]
 }
 ```
+## 광고 내용 변경
 
+Request :
+- Method : PUT
+- Id Endpoint : `/api/adcontent/id/{id}`
+- Content Endpoint : `/api/adcontent/{content}`
+- Header :
+    - Content-Type: application/json
+    - Accept: application/json
+- Body :
+
+```json 
+{
+    "content" : "string"
+}
+```
+[Id]
+Response :
+
+```json 
+{
+    "code" : "number",
+    "status" : "string",
+    "data" : {
+         "id": "long, unique",
+            "content": "string",
+            "image_url": "string",
+            "btn_text": "string",
+            "btn_url": "string"
+     }
+}
+```
+[Content]
+```json 
+{
+    "code" : "number",
+    "status" : "string",
+    "data" : {
+            "content": "string",
+     }
+}
+```
+## 광고 내용 삭제
+
+Request :
+- Method : DELETE
+- Endpoint : `/api/adcontent/id/{id}`
+- Endpoint : `/api/adcontent/{content}`
+- Header :
+    - Accept: application/json
+
+Response :
+
+```json 
+{
+    "code" : "number",
+    "status" : "string"
+}
+```
