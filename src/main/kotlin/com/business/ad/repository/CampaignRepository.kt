@@ -1,5 +1,6 @@
 package com.business.ad.repository
 
+import com.business.ad.dto.ViewCampaignDTO
 import com.business.ad.model.Advertiser
 import com.business.ad.model.Campaign
 import org.springframework.data.jpa.repository.JpaRepository
@@ -11,6 +12,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface CampaignRepository : JpaRepository<Campaign, Long?> {
 
-    fun findByAdvertiseridLike(Advertiserid: String): List<Campaign>
+    fun findByAdvertiserIdLike(AdvertiserId: String): List<Campaign>
     fun findByNameLike(Name: String): List<Campaign>
 }

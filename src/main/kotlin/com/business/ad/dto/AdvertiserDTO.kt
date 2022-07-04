@@ -26,5 +26,10 @@ data class CreateAdvertiserDTO(
 data class ReadAdvertiserJoinCamapignDTO(
     val id: Long? = null,
     val name: String,
-    val campaign: List<Campaign>
+    val campaign: List<ViewCampaignDTO>
+)
+data class ReadAdvertiserJoinCamapignDetailDTO(
+    val id: Long? = null,
+    val name: String,
+    val campaign: List<ViewCampaignAddContentDTO>
 )

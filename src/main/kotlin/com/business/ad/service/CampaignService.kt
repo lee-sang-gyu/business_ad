@@ -49,7 +49,7 @@ class CampaignService {
         val campaignList = mutableListOf<ReadCampaignJoinAdDTO>()
         campaign.forEach {
             //광고주
-            val arr_adv_id = Pattern.compile("/").split(it.advertiserid)
+            val arr_adv_id = Pattern.compile("/").split(it.advertiserId)
             val arr_long_adv_id = mutableListOf<Long>()
             if (arr_adv_id.get(0) != "") {
                 arr_adv_id.forEach {
@@ -57,7 +57,7 @@ class CampaignService {
                 }
             }
             //광고 내용
-            val arr_adc_id = Pattern.compile("/").split(it.adcontentid)
+            val arr_adc_id = Pattern.compile("/").split(it.adcontentId)
             val arr_long_adc_id = mutableListOf<Long>()
             if (arr_adc_id.get(0) != "") {
                 arr_adc_id.forEach {
@@ -78,7 +78,7 @@ class CampaignService {
 
         val campaign = campaignRepository.findById(campaignId)
         //광고주
-        val arr_adv_id = Pattern.compile("/").split(campaign.get().advertiserid)
+        val arr_adv_id = Pattern.compile("/").split(campaign.get().advertiserId)
         val arr_long_adv_id = mutableListOf<Long>()
         if (arr_adv_id.get(0) != "") {
             arr_adv_id.forEach {
@@ -87,7 +87,7 @@ class CampaignService {
         }
         val advertiser = advertiserRepository.findByIdIn(arr_long_adv_id)
         //광고 내용
-        val arr_adc_id = Pattern.compile("/").split(campaign.get().adcontentid)
+        val arr_adc_id = Pattern.compile("/").split(campaign.get().adcontentId)
         val arr_long_adc_id = mutableListOf<Long>()
         if (arr_adc_id.get(0) != "") {
             arr_adc_id.forEach {
@@ -119,11 +119,11 @@ class CampaignService {
         } else {
             var updatedCampaign = existingCampaign.get().copy(
                 name = createCampaignDTO.name,
-                start_date = createCampaignDTO.start_date,
-                end_date = createCampaignDTO.end_date,
-                subject_list = createCampaignDTO.subject_list,
-                advertiserid = createCampaignDTO.advertiserid,
-                adcontentid = createCampaignDTO.adcontentid
+                startDate = createCampaignDTO.startDate,
+                endDate = createCampaignDTO.endDate,
+                subjectList = createCampaignDTO.subjectList,
+                advertiserId = createCampaignDTO.advertiserId,
+                adcontentId = createCampaignDTO.adcontentId
             )
             val campaign = campaignRepository.save(updatedCampaign.toCreateCampaignDTO().toEnitty())
             campaign.toReadCampaignDTO()
@@ -152,12 +152,12 @@ class CampaignService {
         return ReadCampaignJoinAdDTO(
             id = campaign.id,
             name = campaign.name,
-            start_date = campaign.start_date,
-            end_date = campaign.end_date,
-            subject_list = campaign.subject_list,
-            advertiserid = campaign.advertiserid,
+            startDate = campaign.startDate,
+            endDate = campaign.endDate,
+            subjectList = campaign.subjectList,
+            advertiserId = campaign.advertiserId,
             advertiser = join_advertiser,
-            adcontentid = campaign.adcontentid,
+            adcontentId = campaign.adcontentId,
             adcontent = join_adcontent
         )
     }

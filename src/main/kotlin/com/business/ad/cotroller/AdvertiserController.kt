@@ -1,8 +1,6 @@
 package com.business.ad.cotroller
 
-import com.business.ad.dto.CreateAdvertiserDTO
-import com.business.ad.dto.ReadAdvertiserDTO
-import com.business.ad.dto.ReadAdvertiserJoinCamapignDTO
+import com.business.ad.dto.*
 import com.business.ad.model.WebResponse
 import com.business.ad.service.AdvertiserService
 import org.springframework.beans.factory.annotation.Autowired
@@ -66,7 +64,21 @@ class AdvertiserController {
     )
     fun getAdvertiserJoinCampaignById(@PathVariable(value = "id") advertiserId: Long)
             : WebResponse<ReadAdvertiserJoinCamapignDTO> {
-        val Response = advertiserService.getAdvertiserJoinCampaignById(advertiserId)
+        val Response = advertiserService.getAdvertiserByIdJoinCampaign(advertiserId)
+        return WebResponse(
+            code = 200,
+            status = "OK",
+            data = Response
+        )
+    }
+    //조회: 캠페인정보 포함 - 세부목록
+    @GetMapping(
+        value = ["/advertiser/{id}/campaign_detail"],
+        produces = ["application/json"]
+    )
+    fun getAdvertiserByIdJoinCampaignDetail(@PathVariable(value = "id") advertiserId: Long)
+            : WebResponse<ReadAdvertiserJoinCamapignDetailDTO> {
+        val Response = advertiserService.getAdvertiserByIdJoinCampaignDetail(advertiserId)
         return WebResponse(
             code = 200,
             status = "OK",

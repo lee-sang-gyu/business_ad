@@ -49,7 +49,7 @@ class ResultService {
         result.forEach {
             val campaign = campaignRepository.findById(it.campaignid)
             //광고 내용
-            val arr_adc_id = Pattern.compile("/").split(campaign.get().adcontentid)
+            val arr_adc_id = Pattern.compile("/").split(campaign.get().adcontentId)
             val arr_long_adc_id = mutableListOf<Long>()
             if (arr_adc_id.get(0) != "") {
                 arr_adc_id.forEach {
@@ -71,7 +71,7 @@ class ResultService {
         //캠페인 정보
         val campaign = campaignRepository.findById(result.get().campaignid)
         //광고 내용
-        val arr_adc_id = Pattern.compile("/").split(campaign.get().adcontentid)
+        val arr_adc_id = Pattern.compile("/").split(campaign.get().adcontentId)
         val arr_long_adc_id = mutableListOf<Long>()
         if (arr_adc_id.get(0) != "") {
             arr_adc_id.forEach {
@@ -144,11 +144,11 @@ class ResultService {
         return ReadCampaignJoinAdcDTO(
             id = campaign.id,
             name = campaign.name,
-            start_date = campaign.start_date,
-            end_date = campaign.end_date,
-            subject_list = campaign.subject_list,
-            advertiserid = campaign.advertiserid,
-            adcontentid = campaign.adcontentid,
+            startDate = campaign.startDate,
+            endDate = campaign.endDate,
+            subjectList = campaign.subjectList,
+            advertiserId = campaign.advertiserId,
+            adcontentId = campaign.adcontentId,
             adcontent = join_adcontent
         )
     }
