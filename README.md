@@ -461,3 +461,35 @@ Response :
         ]
 }
 ```
+[Id Detail]
+```json 
+{
+    "code" : "number",
+    "status" : "string",
+    "data" :
+        {
+            "id": "long, unique",
+            "name": "string",
+            "startDate": "date",
+            "endDate": "date",
+            "subjectList": "int",
+            "advertiserId": "string",
+            "advertiser": [
+                {
+                    "id": "long, unique",
+                    "name": "string"
+                }
+            ],
+            "adcontentId": "string",
+            "adcontent": [
+                {
+                    "id": "long, unique",
+                    "content": "string",
+                    "image_url": "string",
+                    "btn_text": "string",
+                    "btn_url": "string"
+                }
+            ]
+        }
+}
+```
