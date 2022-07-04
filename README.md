@@ -52,8 +52,8 @@ Request :
     - Accept: application/json
 
 Response :
-
-```json [ALL]
+[ALL]
+```json 
 {
     "code" : "number",
     "status" : "string",
@@ -68,7 +68,8 @@ Response :
      }
 }
 ```
-```json [Id]
+[Id]
+```json 
 {
     "code" : "number",
     "status" : "string",
@@ -78,7 +79,8 @@ Response :
      }
 }
 ```
-```json [Campaign]
+[Campaign]
+```json 
 {
     "code" : "number",
     "status" : "string",
@@ -98,7 +100,8 @@ Response :
      }
 }
 ```
-```json [Campaign_Detail]
+[Campaign_Detail]
+```json 
 {
     "code" : "number",
     "status" : "string",
@@ -226,8 +229,8 @@ Request :
     - Accept: application/json
 
 Response :
-
-```json [ALL]
+[ALL]
+```json 
 {
     "code" : "number",
     "status" : "string",
@@ -242,7 +245,8 @@ Response :
         ]
 }
 ```
-```json [Id]
+[Id]
+```json 
 {
     "code" : "number",
     "status" : "string",
@@ -256,7 +260,8 @@ Response :
         }
 }
 ```
-```json [Content]
+[Content]
+```json 
 {
     "code" : "number",
     "status" : "string",
