@@ -39,7 +39,7 @@ Response :
 }
 ```
 
-## 광고주 
+## 광고주  
 
 Request :
 - Method : GET
