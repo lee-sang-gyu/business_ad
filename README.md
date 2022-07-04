@@ -46,13 +46,14 @@ Request :
 - Method : GET
 - ById Endpoint : `/api/advertiser/{id_advertiser}`
 - All Endpoint : `/api/advertiser`
-- JoinCampaign Endpoint : `/api/advertiser/{id_advertiser}/campaign`
+- Campaign Endpoint : `/api/advertiser/{id_advertiser}/campaign`
+- Detail Endpoint : `/api/advertiser/{id_advertiser}/campaign_detail`
 - Header :
     - Accept: application/json
 
 Response :
 
-```json 
+```json [ById]
 {
     "code" : "number",
     "status" : "string",
@@ -62,7 +63,7 @@ Response :
      }
 }
 ```
-```json 
+```json [ALL]
 {
     "code" : "number",
     "status" : "string",
@@ -77,7 +78,7 @@ Response :
      }
 }
 ```
-```json 
+```json [Campaign]
 {
     "code" : "number",
     "status" : "string",
@@ -92,8 +93,34 @@ Response :
                 "start_date": "date",
                 "end_date": "date",
                 "subject_list": "integer",
-                "advertiserid": "string",
-                "adcontentid": "string"
+            }
+        ]
+     }
+}
+```
+```json [Campaign_Detail]
+{
+    "code" : "number",
+    "status" : "string",
+    "data" : 
+     {
+         "id" : "Long, unique",
+         "name" : "string",
+         "campaign": [
+            {
+                "id": "long, unique",
+                "name": "string",
+                "start_date": "date",
+                "end_date": "date",
+                "subject_list": "integer",
+                "adcontent": [
+                    {
+                        "id": "long, unique",
+                        "content": "string",
+                        "image_url": "string",
+                        "btn_text": "string",
+                        "btn_url": "string"
+                    }
             }
         ]
      }
