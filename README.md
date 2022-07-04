@@ -493,3 +493,56 @@ Response :
         }
 }
 ```
+## 캠페인 변경
+
+Request :
+- Method : PUT
+- Endpoint : `/api/campaign/{id}`
+- Header :
+    - Content-Type: application/json
+    - Accept: application/json
+- Body :
+
+```json 
+{
+    "name": "string",
+    "startDate": "date",
+    "endDate": "date",
+    "subjectList": "int",
+    "advertiserId": "string",
+    "adcontentId": "string"
+}
+```
+Response :
+
+```json 
+{
+    "code" : "number",
+    "status" : "string",
+    "data" : {
+        "name": "string",
+        "startDate": "date",
+        "endDate": "date",
+        "subjectList": "int",
+        "advertiserId": "string",
+        "adcontentId": "string"
+     }
+}
+```
+
+## 캠페인 삭제
+
+Request :
+- Method : DELETE
+- Endpoint : `/api/campaign/{id}`
+- Header :
+    - Accept: application/json
+
+Response :
+
+```json 
+{
+    "code" : "number",
+    "status" : "string"
+}
+```
