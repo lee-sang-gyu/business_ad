@@ -124,6 +124,7 @@ Response :
                         "btn_text": "string",
                         "btn_url": "string"
                     }
+                ]
             }
         ]
      }
