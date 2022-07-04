@@ -10,6 +10,38 @@
 |/advertiser                      |POST                    |광고주 생성|
 |/advertiser/{id}                 |PUT                    |광고주 이름변경|
 |/advertiser/{id}                 |DELETE                 |광고주 삭제|
+## 광고 내용
+|URL                               |Method                 |기능            |
+|----------------------------------|-----------------------|----------------|
+|/adcontent                       |GET                    |광고 내용 전체 조회 |
+|/adcontent/id/{id}                |GET                    |광고 내용 ID로 조회 |
+|/adcontent/{content}             |GET                    |광고 내용(Content)으로 조회|
+|/adcontent             |POST                    |광고 내용 생성|
+|/adcontent/id/{id}             |PUT                    |광고 내용 변경|
+|/adcontent/{content}             |PUT                    |광고 내용(Content) 변경|
+|/adcontent/id/{id}            |DELETE                    |광고 내용 삭제|
+|/adcontent/{content}            |DELETE                    |광고 내용(Content) 삭제|
+## 캠페인 정보
+|URL                               |Method                 |기능            |
+|----------------------------------|-----------------------|----------------|
+|/campaign                       |GET                    |캠페인 전체 조회 |
+|/campaign/{id}                  |GET                    |캠페인 ID로 조회 |
+|/campaign_total                  |GET                    |캠페인 전체 세부 목록 조회|
+|/campaign_total/{id}             |GET                    |캠페인 ID 세부 목록 조회|
+|/campaign                      |POST                    |캠페인 생성|
+|/campaign/{id}                 |PUT                    |캠페인 변경|
+|/campaign/{id}                 |DELETE                 |캠페인 삭제|
+## 캠페인 결과
+|URL                               |Method                 |기능            |
+|----------------------------------|-----------------------|----------------|
+|/result                       |GET                    |결과 전체 조회 |
+|/result_total                 |GET                    |결과 전체 세부목록 조회 |
+|/result/{id}                    |GET                    |결과 ID로 조회|
+|/result_total/{id}           |GET                    |결과 ID로 세부목록 조회|
+|/result                      |POST                    |결과 생성|
+|/result/{id}                 |PUT                    |결과 변경|
+|/result/{id}                 |DELETE                 |결과 삭제|
+
 ## 광고주 생성
 
 Request :
@@ -176,17 +208,7 @@ Response :
 }
 ```
 
-## 광고 내용
-|URL                               |Method                 |기능            |
-|----------------------------------|-----------------------|----------------|
-|/adcontent                       |GET                    |광고 내용 전체 조회 |
-|/adcontent/id/{id}                |GET                    |광고 내용 ID로 조회 |
-|/adcontent/{content}             |GET                    |광고 내용(Content)으로 조회|
-|/adcontent             |POST                    |광고 내용 생성|
-|/adcontent/id/{id}             |PUT                    |광고 내용 변경|
-|/adcontent/{content}             |PUT                    |광고 내용(Content) 변경|
-|/adcontent/id/{id}            |DELETE                    |광고 내용 삭제|
-|/adcontent/{content}            |DELETE                    |광고 내용(Content) 삭제|
+
 ## 광고 내용 생성
 
 Request :
@@ -335,16 +357,7 @@ Response :
     "status" : "string"
 }
 ```
-## 캠페인 정보
-|URL                               |Method                 |기능            |
-|----------------------------------|-----------------------|----------------|
-|/campaign                       |GET                    |캠페인 전체 조회 |
-|/campaign/{id}                  |GET                    |캠페인 ID로 조회 |
-|/campaign_total                  |GET                    |캠페인 전체 세부 목록 조회|
-|/campaign_total/{id}             |GET                    |캠페인 ID 세부 목록 조회|
-|/campaign                      |POST                    |캠페인 생성|
-|/campaign/{id}                 |PUT                    |캠페인 변경|
-|/campaign/{id}                 |DELETE                 |캠페인 삭제|
+
 
 ## 캠페인 생성
 
@@ -546,13 +559,4 @@ Response :
     "status" : "string"
 }
 ```
-## 캠페인 결과
-|URL                               |Method                 |기능            |
-|----------------------------------|-----------------------|----------------|
-|/result                       |GET                    |결과 전체 조회 |
-|/result_total                 |GET                    |결과 전체 세부목록 조회 |
-|/result/{id}                    |GET                    |결과 ID로 조회|
-|/result_total/{id}           |GET                    |결과 ID로 세부목록 조회|
-|/result                      |POST                    |결과 생성|
-|/result/{id}                 |PUT                    |결과 변경|
-|/result/{id}                 |DELETE                 |결과 삭제|
+
