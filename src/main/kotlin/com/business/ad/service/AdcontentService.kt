@@ -77,26 +77,12 @@ class AdcontentService {
         existingAdcontent.map { it.content = readAdcontentDTO.content }
         val updateAdcontent = adcontentRepository.saveAll(existingAdcontent)
         return updateAdcontent.map { it.toReadAdcontentDTO() }
-        /*return if (existingAdcontent.isEmpty()) {
-            existingAdcontent.map { it.toReadAdcontentDTO() }
-        } else {
-            existingAdcontent.map { it.content = readAdcontentDTO.content }
-            val updateAdcontent = adcontentRepository.saveAll(existingAdcontent)
-            updateAdcontent.map { it.toReadAdcontentDTO() }
-        }*/
     }
 
     // 내용 항목 삭제, 나머지의 같은 내용 항목의 광고내용 전부 삭제
     fun deleteOnlyContentByContent(@PathVariable(value = "content") Content: String) {
 
         val adcontent = findAdcontentByContentOrThrowNotFound(Content)
-       /* return if (adcontent.isEmpty()) {
-            return false
-        } else {
-            adcontentRepository.deleteAll(adcontent)
-            val checkAdcontent = adcontentRepository.findByContent(Content)
-            return checkAdcontent.isEmpty()
-        }*/
         adcontentRepository.deleteAll(adcontent)
     }
 

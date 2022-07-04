@@ -10,9 +10,9 @@ data class Adcontent(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
     var content: String,
-    var image_url: String,
-    var btn_text: String,
-    var btn_url: String
+    var image_url: String?,
+    var btn_text: String?,
+    var btn_url: String?
 
 ) {
     fun toReadAdcontentDTO(): ReadAdcontentDTO {

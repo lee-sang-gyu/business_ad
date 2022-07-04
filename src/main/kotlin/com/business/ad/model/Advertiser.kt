@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank
 @Entity
 data class Advertiser(
     @Id
-    var id: Long = 0,
+    val id: Long = 0,
 
     @get: NotBlank
     var name: String = ""

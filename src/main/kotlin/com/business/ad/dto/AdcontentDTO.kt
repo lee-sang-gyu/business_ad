@@ -14,9 +14,9 @@ data class ReadAdcontentDTO(
 data class CreateAdcontentDTO(
     val id: Long,
     val content: String,
-    val image_url: String,
-    val btn_text: String,
-    val btn_url: String
+    val image_url: String?,
+    val btn_text: String?,
+    val btn_url: String?
 ) {
     fun toEnitty(): Adcontent {
         return Adcontent(
