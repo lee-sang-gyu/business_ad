@@ -44,8 +44,8 @@ Response :
 
 Request :
 - Method : GET
-- ById Endpoint : `/api/advertiser/{id_advertiser}`
 - All Endpoint : `/api/advertiser`
+- Id Endpoint : `/api/advertiser/{id_advertiser}`
 - Campaign Endpoint : `/api/advertiser/{id_advertiser}/campaign`
 - Detail Endpoint : `/api/advertiser/{id_advertiser}/campaign_detail`
 - Header :
@@ -53,16 +53,6 @@ Request :
 
 Response :
 
-```json [ById]
-{
-    "code" : "number",
-    "status" : "string",
-    "data" : {
-         "id" : "long, unique",
-         "name" : "string"
-     }
-}
-```
 ```json [ALL]
 {
     "code" : "number",
@@ -73,6 +63,16 @@ Response :
          "name" : "string"
      },
      {
+         "id" : "long, unique",
+         "name" : "string"
+     }
+}
+```
+```json [Id]
+{
+    "code" : "number",
+    "status" : "string",
+    "data" : {
          "id" : "long, unique",
          "name" : "string"
      }
@@ -183,11 +183,11 @@ Response :
 |/adcontent/{content}             |PUT                    |광고 내용(Content) 변경|
 |/adcontent/id/{id}            |DELETE                    |광고 내용 삭제|
 |/adcontent/{content}            |DELETE                    |광고 내용(Content) 삭제|
-## 광고주 생성
+## 광고 내용 생성
 
 Request :
 - Method : POST
-- Endpoint : `/api/advertiser`
+- Endpoint : `/api/adcontent`
 - Header :
     - Content-Type: application/json
     - Accept: application/json
@@ -213,6 +213,62 @@ Response :
         "btn_text": "string",
         "btn_url": "string"
      }
+}
+```
+## 광고 내용 조회
+
+Request :
+- Method : GET
+- All Endpoint : `/api/adcontent`
+- Id Endpoint : `/api/adcontent/id/{id}`
+- Content Endpoint : `/api/aadcontent/{content}`
+- Header :
+    - Accept: application/json
+
+Response :
+
+```json [ALL]
+{
+    "code" : "number",
+    "status" : "string",
+    "data" : [
+        {
+            "id": "long, unique",
+            "content": "string",
+            "image_url": "string",
+            "btn_text": "string",
+            "btn_url": "string"
+        }
+        ]
+}
+```
+```json [Id]
+{
+    "code" : "number",
+    "status" : "string",
+    "data" : 
+        {
+            "id": "long, unique",
+            "content": "string",
+            "image_url": "string",
+            "btn_text": "string",
+            "btn_url": "string"
+        }
+}
+```
+```json [Content]
+{
+    "code" : "number",
+    "status" : "string",
+    "data" : [
+        {
+            "id": "long, unique",
+            "content": "string",
+            "image_url": "string",
+            "btn_text": "string",
+            "btn_url": "string"
+        }
+        ]
 }
 ```
 
