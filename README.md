@@ -546,3 +546,13 @@ Response :
     "status" : "string"
 }
 ```
+## 캠페인 결과
+|URL                               |Method                 |기능            |
+|----------------------------------|-----------------------|----------------|
+|/result                       |GET                    |결과 전체 조회 |
+|/result_total                 |GET                    |결과 전체 세부목록 조회 |
+|/result/{id}                    |GET                    |결과 ID로 조회|
+|/result_total/{id}           |GET                    |결과 ID로 세부목록 조회|
+|/result                      |POST                    |결과 생성|
+|/result/{id}                 |PUT                    |결과 변경|
+|/result/{id}                 |DELETE                 |결과 삭제|
