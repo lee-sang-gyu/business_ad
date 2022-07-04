@@ -344,3 +344,38 @@ Response :
 |/campaign                      |POST                    |캠페인 생성|
 |/campaign/{id}                 |PUT                    |캠페인 변경|
 |/campaign/{id}                 |DELETE                 |캠페인 삭제|
+
+## 캠페인 생성
+
+Request :
+- Method : POST
+- Endpoint : `/api/campaign`
+- Header :
+    - Content-Type: application/json
+    - Accept: application/json
+- Body :
+
+```json 
+{
+    "id" : "long, unique",
+    "name" : "string"
+}
+```
+
+Response :
+
+```json 
+{
+    "code" : "number",
+    "status" : "string",
+    "data" : {
+         "id": "long, unique",
+        "name": "string",
+        "startDate": "date",
+        "endDate": "date",
+        "subjectList": "int",
+        "advertiserId": "string", //조건 "$" + "advertiserId" + "/" + "$" + "advertiserId" + "/" .... sample: $1/$2/$3/
+        "adcontentId": "string"  //조건 "$" + "adcontentId" + "/" + "$" + "adcontentId" + "/" .... sample: $1/$2/$3/
+     }
+}
+```
