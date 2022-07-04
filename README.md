@@ -560,4 +560,203 @@ Response :
     "status" : "string"
 }
 ```
+## 결과 
+## 결과 생성
 
+Request :
+- Method : POST
+- Endpoint : `/api/result`
+- Header :
+    - Content-Type: application/json
+    - Accept: application/json
+- Body :
+
+```json 
+{
+    "id" : "long, unique",
+    "campaignid" : "string"
+    "cliks" : "int",
+    "exposure" : "int"
+}
+```
+
+Response :
+
+```json 
+{
+    "code" : "number",
+    "status" : "string",
+    "data" : {
+        "id" : "long, unique",
+        "campaignid" : "string"
+        "cliks" : "int",
+        "exposure" : "int"
+     }
+}
+```
+## 결과 조회
+
+Request :
+- Method : GET
+- All Endpoint : `/api/result`
+- Id Endpoint : `/api/result/{id}`
+- Detail Endpoint : `/api/result_total`
+- Id Detail Endpoint : `/api/result_total/{id} `
+- Header :
+    - Accept: application/json
+
+Response :
+[ALL]
+```json 
+{
+    "code" : "number",
+    "status" : "string",
+    "data" : [
+        {
+            "id": "long, unique",
+            "campaignid": "long",
+            "cliks": "int",
+            "exposure": "int"
+        }
+    ]
+}
+```
+[Id]
+```json 
+{
+    "code" : "number",
+    "status" : "string",
+    "data" : 
+        {
+            "id": "long, unique",
+            "campaignid": "long",
+            "cliks": "int",
+            "exposure": "int"
+        }
+}
+```
+[Detail]
+```json 
+{
+    "code" : "number",
+    "status" : "string",
+    "data" : [
+        {
+            "id": "long, unique",
+            "campaignid": "long",
+            "cliks": "int",
+            "exposure": "int"
+            "campaign": {
+                "id": "long, unique",
+                "name": "string",
+                "startDate": "date",
+                "endDate": "date",
+                "subjectList": "int",
+                "advertiserId": "string",
+                "advertiser": [
+                    {
+                        "id": "long, unique",
+                        "name": "string"
+                    }
+                ],
+                "adcontentId": "string",
+                "adcontent": [
+                    {
+                        "id": "long, unique",
+                        "content": "string",
+                        "image_url": "string",
+                        "btn_text": "string",
+                        "btn_url": "string"
+                    }
+                ]
+            }
+        }
+        
+        ]
+}
+```
+[Id Detail]
+```json 
+{
+    "code" : "number",
+    "status" : "string",
+    "data" :
+        {
+            "id": "long, unique",
+            "campaignid": "long",
+            "cliks": "int",
+            "exposure": "int"
+            "campaign": {
+                "id": "long, unique",
+                "name": "string",
+                "startDate": "date",
+                "endDate": "date",
+                "subjectList": "int",
+                "advertiserId": "string",
+                "advertiser": [
+                    {
+                        "id": "long, unique",
+                        "name": "string"
+                    }
+                ],
+                "adcontentId": "string",
+                "adcontent": [
+                    {
+                        "id": "long, unique",
+                        "content": "string",
+                        "image_url": "string",
+                        "btn_text": "string",
+                        "btn_url": "string"
+                    }
+                ]
+            }
+        }
+}
+```
+## 결과 변경
+
+Request :
+- Method : PUT
+- Endpoint : `/api/result/{id}`
+- Header :
+    - Content-Type: application/json
+    - Accept: application/json
+- Body :
+
+```json 
+{
+    "campaignid" : "string"
+    "cliks" : "int",
+    "exposure" : "int"
+}
+```
+Response :
+
+```json 
+{
+    "code" : "number",
+    "status" : "string",
+    "data" : {
+            "campaignid" : "string"
+            "cliks" : "int",
+            "exposure" : "int"
+     }
+}
+```
+
+## 결과 삭제
+
+Request :
+- Method : DELETE
+- Endpoint : `/api/result/{id}`
+- Header :
+    - Accept: application/json
+
+Response :
+
+```json 
+{
+    "code" : "number",
+    "status" : "string"
+}
+```
