@@ -21,8 +21,10 @@ import java.util.regex.Pattern
 class AdvertiserService {
     @Autowired
     lateinit var validationUtil: ValidationUtil
+
     @Autowired
     lateinit var advertiserRepository: AdvertiserRepository
+
     @Autowired
     lateinit var adcontentRepository: AdcontentRepository
 
@@ -56,6 +58,7 @@ class AdvertiserService {
         val campaign = campaignRepository.findByAdvertiserIdLike(like_adv)
         return ReadAdvertiserJoinCamapignDTO(advertiser.id, advertiser.name, campaign.map { it.toViewCampaignDTO() })
     }
+
     //광고주 조회: 캠페인 포함 - 세부목록
     fun getAdvertiserByIdJoinCampaignDetail(
         @PathVariable(value = "id") advertiserId: Long
@@ -68,6 +71,9 @@ class AdvertiserService {
 
             //광고 내용
             val arr_adc_id = Pattern.compile("/").split(it.adcontentId)
+            if (it.adcontentId == null) {
+                it.adcontentId = ""
+            }
             val arr_long_adc_id = mutableListOf<Long>()
             if (arr_adc_id.get(0) != "") {
                 arr_adc_id.forEach {
@@ -119,9 +125,6 @@ class AdvertiserService {
             startDate = campaign.startDate,
             endDate = campaign.endDate,
             subjectList = campaign.subjectList,
-         /*   advertiserId = campaign.advertiserId,
-            advertiser = join_advertiser,*/
-            //adcontentId = campaign.adcontentId,
             adcontent = join_adcontent
         )
     }

@@ -31,5 +31,5 @@ data class ReadResultJoinCampaignDTO(
     val campaignid: Long,
     val cliks: Int?,
     val exposure: Int?,
-    var campaign: ReadCampaignJoinAdcDTO?
+    var campaign: ReadCampaignJoinAdDTO?
 )

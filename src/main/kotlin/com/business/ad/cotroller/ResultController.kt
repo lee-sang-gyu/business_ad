@@ -2,6 +2,8 @@ package com.business.ad.cotroller
 
 import com.business.ad.dto.CreateResultDTO
 import com.business.ad.dto.ReadResultDTO
+import com.business.ad.dto.ReadResultJoinCampaignDTO
+import com.business.ad.model.WebResponse
 import com.business.ad.service.ResultService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -15,53 +17,110 @@ class ResultController {
     private lateinit var resultService: ResultService
 
     //모든 캠페인 결과 조회
-    @GetMapping("/result")
-    fun getAllResult(): ResponseEntity<Any> {
-        return ResponseEntity.ok().body(resultService.getResult())
+    @GetMapping(
+        value = ["/result"],
+        produces = ["application/json"]
+    )
+    fun getAllResult(): WebResponse<List<ReadResultDTO>> {
+        val Response = resultService.getResult()
+        return WebResponse(
+            code = 200,
+            status = "OK",
+            data = Response
+        )
     }
 
     //모든 캠페인 결과 조회: 캠페인 정보 포함
-    @GetMapping("/result_total")
-    fun getAllResultJoinCampaign(): ResponseEntity<Any> {
-        return ResponseEntity.ok().body(resultService.getResultJoinCampaign())
+    @GetMapping(
+        value = ["/result_total"],
+        produces = ["application/json"]
+    )
+    fun getAllResultJoinCampaign(): WebResponse<List<ReadResultJoinCampaignDTO>> {
+        val Response = resultService.getResultJoinCampaign()
+        return WebResponse(
+            code = 200,
+            status = "OK",
+            data = Response
+        )
     }
 
     //Id로 조회
-    @GetMapping("/result/{id}")
+    @GetMapping(
+        value = ["/result/{id}"],
+        produces = ["application/json"]
+    )
     fun getResultById(@PathVariable(value = "id") resultId: Long)
-            : ResponseEntity<ReadResultDTO> {
-        return ResponseEntity.ok().body(resultService.getResultById(resultId))
+            : WebResponse<ReadResultDTO> {
+        val Response = resultService.getResultById(resultId)
+        return WebResponse(
+            code = 200,
+            status = "OK",
+            data = Response
+        )
     }
 
     //캠페인 결과 Id로 조회: 캠페인 정보 포함
-    @GetMapping("/result_total/{id}")
+    @GetMapping(
+        value = ["/result_total/{id}"],
+        produces = ["application/json"]
+    )
     fun getResultJoinCampaignById(
         @PathVariable(value = "id") resultId: Long
-    ): ResponseEntity<Any> {
-        return ResponseEntity.ok().body(resultService.getResultJoinCampaignById(resultId))
+    ): WebResponse<ReadResultJoinCampaignDTO> {
+        val Response = resultService.getResultJoinCampaignById(resultId)
+        return WebResponse(
+            code = 200,
+            status = "OK",
+            data = Response
+        )
     }
 
     //캠페인 결과 생성
-    @PostMapping("/result")
+    @PostMapping(
+        value = ["/result"],
+        produces = ["application/json"],
+        consumes = ["application/json"]
+    )
     fun createResult(@RequestBody createResultDTO: CreateResultDTO)
-            : ResponseEntity<Any> {
-        resultService.createResult(createResultDTO)
-        return ResponseEntity.ok().body(true)
+            : WebResponse<CreateResultDTO> {
+        val Response = resultService.createResult(createResultDTO)
+        return WebResponse(
+            code = 200,
+            status = "OK",
+            data = Response
+        )
     }
 
     //캠페인 결과 Id로 변경
-    @PutMapping("/result/{id}")
+    @PutMapping(
+        value = ["/result/{id}"],
+        produces = ["application/json"],
+        consumes = ["application/json"]
+    )
     fun updateResultById(
         @PathVariable(value = "id") resultId: Long,
         @RequestBody updateResult: CreateResultDTO
-    ): ResponseEntity<Any> {
-        return ResponseEntity.ok().body(resultService.updateResultById(resultId, updateResult))
+    ): WebResponse<ReadResultDTO> {
+        val Response = resultService.updateResultById(resultId, updateResult)
+        return WebResponse(
+            code = 200,
+            status = "OK",
+            data = Response
+        )
     }
 
     //캠페인 결과 Id로 삭제
-    @DeleteMapping("/result/{id}")
+    @DeleteMapping(
+        value = ["/result/{id}"],
+        produces = ["application/json"]
+    )
     fun deleteResultById(@PathVariable(value = "id") resultId: Long)
-            : ResponseEntity<Any> {
-        return ResponseEntity.ok().body(resultService.deleteResultById(resultId))
+            : WebResponse<Long> {
+        resultService.deleteResultById(resultId)
+        return WebResponse(
+            code = 200,
+            status = "OK",
+            data = resultId
+        )
     }
 }

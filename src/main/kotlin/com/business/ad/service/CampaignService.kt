@@ -1,6 +1,7 @@
 package com.business.ad.service
 
 import com.business.ad.dto.*
+import com.business.ad.error.NotFoundException
 import com.business.ad.model.Adcontent
 import com.business.ad.model.Advertiser
 import com.business.ad.model.Campaign
@@ -8,6 +9,7 @@ import com.business.ad.repository.AdcontentRepository
 import com.business.ad.repository.AdvertiserRepository
 import com.business.ad.repository.CampaignRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.PathVariable
 import java.util.regex.Pattern
@@ -34,12 +36,13 @@ class CampaignService {
     fun getCampaignById(
         @PathVariable(value = "id") campaignId: Long
     ): ReadCampaignDTO {
-        val campaign = campaignRepository.findById(campaignId)
-        return if (campaign.isEmpty) {
+        val campaign = findCampaignByIdOrThrowNotFound(campaignId)
+        return campaign.toReadCampaignDTO()
+        /*return if (campaign.isEmpty) {
             ReadCampaignDTO(campaignId, "", null, null, 0, "", "")
         } else {
             campaign.get().toReadCampaignDTO()
-        }
+        }*/
     }
 
     //전체 조회: 광고주, 광고내용 포함
@@ -48,6 +51,12 @@ class CampaignService {
         val campaign = campaignRepository.findAll()
         val campaignList = mutableListOf<ReadCampaignJoinAdDTO>()
         campaign.forEach {
+            if (it.advertiserId == null) {
+                it.advertiserId = ""
+            }
+            if (it.adcontentId == null) {
+                it.adcontentId = ""
+            }
             //광고주
             val arr_adv_id = Pattern.compile("/").split(it.advertiserId)
             val arr_long_adv_id = mutableListOf<Long>()
@@ -76,9 +85,16 @@ class CampaignService {
         @PathVariable(value = "id") campaignId: Long
     ): ReadCampaignJoinAdDTO {
 
-        val campaign = campaignRepository.findById(campaignId)
+        val campaign = findCampaignByIdOrThrowNotFound(campaignId)
+        if (campaign.advertiserId == null) {
+            campaign.advertiserId = ""
+        }
+        if (campaign.adcontentId == null) {
+            campaign.adcontentId = ""
+        }
         //광고주
-        val arr_adv_id = Pattern.compile("/").split(campaign.get().advertiserId)
+        val arr_adv_id = Pattern.compile("/").split(campaign.advertiserId)
+
         val arr_long_adv_id = mutableListOf<Long>()
         if (arr_adv_id.get(0) != "") {
             arr_adv_id.forEach {
@@ -86,8 +102,9 @@ class CampaignService {
             }
         }
         val advertiser = advertiserRepository.findByIdIn(arr_long_adv_id)
+
         //광고 내용
-        val arr_adc_id = Pattern.compile("/").split(campaign.get().adcontentId)
+        val arr_adc_id = Pattern.compile("/").split(campaign.adcontentId)
         val arr_long_adc_id = mutableListOf<Long>()
         if (arr_adc_id.get(0) != "") {
             arr_adc_id.forEach {
@@ -95,7 +112,7 @@ class CampaignService {
             }
         }
         val adcontent = adcontentRepository.findByIdIn(arr_long_adc_id)
-        return convertCampaignResponse(campaign.get(), advertiser, adcontent)
+        return convertCampaignResponse(campaign, advertiser, adcontent)
     }
 
     //캠페인 생성
@@ -112,35 +129,33 @@ class CampaignService {
         @PathVariable(value = "id") campaignId: Long,
         createCampaignDTO: CreateCampaignDTO
     ): ReadCampaignDTO {
-        val existingCampaign = campaignRepository.findById(campaignId)
-
-        return if (existingCampaign.isEmpty) {
-            ReadCampaignDTO(campaignId, "", null, null, 0, "", "")
-        } else {
-            var updatedCampaign = existingCampaign.get().copy(
-                name = createCampaignDTO.name,
-                startDate = createCampaignDTO.startDate,
-                endDate = createCampaignDTO.endDate,
-                subjectList = createCampaignDTO.subjectList,
-                advertiserId = createCampaignDTO.advertiserId,
-                adcontentId = createCampaignDTO.adcontentId
-            )
-            val campaign = campaignRepository.save(updatedCampaign.toCreateCampaignDTO().toEnitty())
-            campaign.toReadCampaignDTO()
-        }
+        val existingCampaign = findCampaignByIdOrThrowNotFound(campaignId)
+        var updatedCampaign = existingCampaign.copy(
+            name = createCampaignDTO.name,
+            startDate = createCampaignDTO.startDate,
+            endDate = createCampaignDTO.endDate,
+            subjectList = createCampaignDTO.subjectList,
+            advertiserId = createCampaignDTO.advertiserId,
+            adcontentId = createCampaignDTO.adcontentId
+        )
+        val campaign = campaignRepository.save(updatedCampaign.toCreateCampaignDTO().toEnitty())
+        return campaign.toReadCampaignDTO()
     }
 
     //id로 삭제
     fun deleteCampaignById(
         @PathVariable(value = "id") campaignId: Long
-    ): Boolean {
-        val campaign = campaignRepository.findById(campaignId)
-        return if (campaign.isEmpty) {
-            return false
+    ) {
+        val campaign = findCampaignByIdOrThrowNotFound(campaignId)
+        campaignRepository.delete(campaign)
+    }
+
+    private fun findCampaignByIdOrThrowNotFound(id: Long): Campaign {
+        val campaign = campaignRepository.findByIdOrNull(id)
+        if (campaign == null) {
+            throw NotFoundException()
         } else {
-            campaign.map { deleteCampaign -> campaignRepository.delete(deleteCampaign) }
-            val checkCampaign = campaignRepository.findById(campaignId)
-            return checkCampaign.isEmpty
+            return campaign;
         }
     }
 

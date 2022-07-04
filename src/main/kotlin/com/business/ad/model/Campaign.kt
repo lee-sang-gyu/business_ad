@@ -15,15 +15,15 @@ data class Campaign(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
     var name: String,
-    @Column(name = "start_date")
+    //@Column(name = "start_date")
     var startDate: Date?,
-    @Column(name = "end_date")
+    //@Column(name = "end_date")
     var endDate: Date?,
-    @Column(name = "subject_list")
+    //@Column(name = "subject_list")
     var subjectList: Int?,
-    @Column(name = "advertiser_id")
+    //@Column(name = "advertiser_id")
     var advertiserId: String?,
-    @Column(name = "adcontent_id")
+    //@Column(name = "adcontent_id")
     var adcontentId: String?
 ) {
     fun toViewCampaignDTO(): ViewCampaignDTO {
