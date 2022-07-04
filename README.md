@@ -171,3 +171,48 @@ Response :
     "status" : "string"
 }
 ```
+
+## 광고 내용
+|URL                               |Method                 |기능            |
+|----------------------------------|-----------------------|----------------|
+|/adcontent                       |GET                    |광고 내용 전체 조회 |
+|/adcontent/id/{id}                |GET                    |광고 내용 ID로 조회 |
+|/adcontent/{content}             |GET                    |광고 내용(Content)으로 조회|
+|/adcontent             |POST                    |광고 내용 생성|
+|/adcontent/id/{id}             |PUT                    |광고 내용 변경|
+|/adcontent/{content}             |PUT                    |광고 내용(Content) 변경|
+|/adcontent/id/{id}            |DELETE                    |광고 내용 삭제|
+|/adcontent/{content}            |DELETE                    |광고 내용(Content) 삭제|
+## 광고주 생성
+
+Request :
+- Method : POST
+- Endpoint : `/api/advertiser`
+- Header :
+    - Content-Type: application/json
+    - Accept: application/json
+- Body :
+
+```json 
+{
+    "id" : "long, unique",
+    "content" : "string"
+}
+```
+
+Response :
+
+```json 
+{
+    "code" : "number",
+    "status" : "string",
+    "data" : {
+         "id": "long, unique",
+        "content": "string",
+        "image_url": "string",
+        "btn_text": "string",
+        "btn_url": "string"
+     }
+}
+```
+
