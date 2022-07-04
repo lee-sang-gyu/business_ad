@@ -42,6 +42,7 @@
 |/result/{id}                 |PUT                    |결과 변경|
 |/result/{id}                 |DELETE                 |결과 삭제|
 
+## 광고주
 ## 광고주 생성
 
 Request :
@@ -208,7 +209,7 @@ Response :
 }
 ```
 
-
+## 광고 내용
 ## 광고 내용 생성
 
 Request :
@@ -358,7 +359,7 @@ Response :
 }
 ```
 
-
+## 캠페인 
 ## 캠페인 생성
 
 Request :
