@@ -334,3 +334,13 @@ Response :
     "status" : "string"
 }
 ```
+## 캠페인 정보
+|URL                               |Method                 |기능            |
+|----------------------------------|-----------------------|----------------|
+|/campaign                       |GET                    |캠페인 전체 조회 |
+|/campaign/{id}                  |GET                    |캠페인 ID로 조회 |
+|/campaign_total                  |GET                    |캠페인 전체 세부 목록 조회|
+|/campaign_total/{id}             |GET                    |캠페인 ID 세부 목록 조회|
+|/campaign                      |POST                    |캠페인 생성|
+|/campaign/{id}                 |PUT                    |캠페인 변경|
+|/campaign/{id}                 |DELETE                 |캠페인 삭제|
