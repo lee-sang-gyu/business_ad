@@ -292,9 +292,8 @@ Request :
     "content" : "string"
 }
 ```
-[Id]
 Response :
-
+[Id]
 ```json 
 {
     "code" : "number",
