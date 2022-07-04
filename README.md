@@ -45,9 +45,9 @@ Response :
 Request :
 - Method : GET
 - All Endpoint : `/api/advertiser`
-- Id Endpoint : `/api/advertiser/{id_advertiser}`
-- Campaign Endpoint : `/api/advertiser/{id_advertiser}/campaign`
-- Detail Endpoint : `/api/advertiser/{id_advertiser}/campaign_detail`
+- Id Endpoint : `/api/advertiser/{id}`
+- Campaign Endpoint : `/api/advertiser/{id}/campaign`
+- Detail Endpoint : `/api/advertiser/{id}/campaign_detail`
 - Header :
     - Accept: application/json
 
@@ -377,5 +377,86 @@ Response :
         "advertiserId": "string", //조건 "$" + "advertiserId" + "/" + "$" + "advertiserId" + "/" .... sample: $1/$2/$3/
         "adcontentId": "string"  //조건 "$" + "adcontentId" + "/" + "$" + "adcontentId" + "/" .... sample: $1/$2/$3/
      }
+}
+```
+## 캠페인 조회
+
+Request :
+- Method : GET
+- All Endpoint : `/api/campaign`
+- Id Endpoint : `/api/campaign/{id}`
+- Detail Endpoint : `/api/campaign_total`
+- Id Detail Endpoint : `/api/campaign_total/{id} `
+- Header :
+    - Accept: application/json
+
+Response :
+[ALL]
+```json 
+{
+    "code" : "number",
+    "status" : "string",
+    "data" : [
+        {
+            "id": "long, unique",
+            "name": "string",
+            "startDate": "date",
+            "endDate": "date",
+            "subjectList": "int",
+            "advertiserId": "string",
+            "adcontentId": "string"
+        }
+        ]
+}
+```
+[Id]
+```json 
+{
+    "code" : "number",
+    "status" : "string",
+    "data" : 
+        {
+            "id": "long, unique",
+            "name": "string",
+            "startDate": "date",
+            "endDate": "date",
+            "subjectList": "int",
+            "advertiserId": "string",
+            "adcontentId": "string"
+        }
+}
+```
+[Detail]
+```json 
+{
+    "code" : "number",
+    "status" : "string",
+    "data" : [
+        {
+            "id": "long, unique",
+            "name": "string",
+            "startDate": "date",
+            "endDate": "date",
+            "subjectList": "int",
+            "advertiserId": "string",
+            "advertiser": [
+                {
+                    "id": "long, unique",
+                    "name": "string"
+                }
+            ],
+            "adcontentId": "string",
+            "adcontent": [
+                {
+                    "id": "long, unique",
+                    "content": "string",
+                    "image_url": "string",
+                    "btn_text": "string",
+                    "btn_url": "string"
+                }
+            ]
+        }
+        }
+        ]
 }
 ```
