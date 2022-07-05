@@ -124,9 +124,9 @@ Response :
             {
                 "id": "long, unique",
                 "name": "string",
-                "start_date": "date",
-                "end_date": "date",
-                "subject_list": "integer",
+                "startDate": "date",
+                "endDate": "date",
+                "subjectList": "integer",
             }
         ]
      }
@@ -145,10 +145,10 @@ Response :
             {
                 "id": "long, unique",
                 "name": "string",
-                "start_date": "date",
-                "end_date": "date",
-                "subject_list": "integer",
-                "adcontent": [
+                "startDate": "date",
+                "endDate": "date",
+                "subjectList": "integer",
+                "adcontentList": [
                     {
                         "id": "long, unique",
                         "content": "string",
