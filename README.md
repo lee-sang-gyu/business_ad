@@ -389,8 +389,22 @@ Response :
         "startDate": "date",
         "endDate": "date",
         "subjectList": "int",
-        "advertiserId": "string", //조건 "$" + "advertiserId" + "/" + "$" + "advertiserId" + "/" .... sample: $1/$2/$3/
-        "adcontentId": "string"  //조건 "$" + "adcontentId" + "/" + "$" + "adcontentId" + "/" .... sample: $1/$2/$3/
+        "advertiserList": "Advertiser"
+        [
+            {
+                "id": "long, unique",
+                "name": "string"
+            }
+        
+        ],
+        "adcontentList": "Adcontent"
+        [
+            {
+                "id": "long, unique"
+                "content": "string"
+                ...
+            }
+        ]
      }
 }
 ```
@@ -400,8 +414,7 @@ Request :
 - Method : GET
 - All Endpoint : `/api/campaign`
 - Id Endpoint : `/api/campaign/{id}`
-- Detail Endpoint : `/api/campaign_total`
-- Id Detail Endpoint : `/api/campaign_total/{id} `
+- OnlyCampaign Endpoint : `/api/campaign_only`
 - Header :
     - Accept: application/json
 
@@ -418,8 +431,24 @@ Response :
             "startDate": "date",
             "endDate": "date",
             "subjectList": "int",
-            "advertiserId": "string",
-            "adcontentId": "string"
+            "advertiserList": "Advertiser"
+            [
+                {
+                    "id": "long, unique",
+                    "name": "string"
+                }
+                ...
+
+            ],
+            "adcontentList": "Adcontent"
+            [
+                {
+                    "id": "long, unique"
+                    "content": "string"
+                    ...
+                }
+            ]
+         }
         }
         ]
 }
@@ -436,8 +465,18 @@ Response :
             "startDate": "date",
             "endDate": "date",
             "subjectList": "int",
-            "advertiserId": "string",
-            "adcontentId": "string"
+             "advertiserList": "Advertiser"
+                {
+                    "id": "long, unique",
+                    "name": "string"
+                }
+            ,
+            "adcontentList": "Adcontent"
+                {
+                    "id": "long, unique"
+                    "content": "string"
+                    ...
+                }
         }
 }
 ```
@@ -452,61 +491,14 @@ Response :
             "name": "string",
             "startDate": "date",
             "endDate": "date",
-            "subjectList": "int",
-            "advertiserId": "string",
-            "advertiser": [
-                {
-                    "id": "long, unique",
-                    "name": "string"
-                }
-            ],
-            "adcontentId": "string",
-            "adcontent": [
-                {
-                    "id": "long, unique",
-                    "content": "string",
-                    "image_url": "string",
-                    "btn_text": "string",
-                    "btn_url": "string"
-                }
-            ]
+            "subjectList": "int"
+            
         }
         
         ]
 }
 ```
-[Id Detail]
-```json 
-{
-    "code" : "number",
-    "status" : "string",
-    "data" :
-        {
-            "id": "long, unique",
-            "name": "string",
-            "startDate": "date",
-            "endDate": "date",
-            "subjectList": "int",
-            "advertiserId": "string",
-            "advertiser": [
-                {
-                    "id": "long, unique",
-                    "name": "string"
-                }
-            ],
-            "adcontentId": "string",
-            "adcontent": [
-                {
-                    "id": "long, unique",
-                    "content": "string",
-                    "image_url": "string",
-                    "btn_text": "string",
-                    "btn_url": "string"
-                }
-            ]
-        }
-}
-```
+
 ## 캠페인 변경
 
 Request :
@@ -523,8 +515,8 @@ Request :
     "startDate": "date",
     "endDate": "date",
     "subjectList": "int",
-    "advertiserId": "string",
-    "adcontentId": "string"
+    "advertiserList": "Advertiser",
+    "adcontentList": "Adcontent"
 }
 ```
 Response :
@@ -533,14 +525,26 @@ Response :
 {
     "code" : "number",
     "status" : "string",
-    "data" : {
-        "name": "string",
-        "startDate": "date",
-        "endDate": "date",
-        "subjectList": "int",
-        "advertiserId": "string",
-        "adcontentId": "string"
-     }
+    "data" : 
+        {
+            "id": "long, unique",
+            "name": "string",
+            "startDate": "date",
+            "endDate": "date",
+            "subjectList": "int",
+            "advertiserList": "Advertiser"
+                {
+                    "id": "long, unique",
+                    "name": "string"
+                }
+            ,
+            "adcontentList": "Adcontent"
+                {
+                    "id": "long, unique"
+                    "content": "string"
+                    ...
+                }
+        }
 }
 ```
 
@@ -574,7 +578,7 @@ Request :
 ```json 
 {
     "id" : "long, unique",
-    "campaignid" : "string"
+    "campaignId" : "string"
     "cliks" : "int",
     "exposure" : "int"
 }
@@ -588,7 +592,7 @@ Response :
     "status" : "string",
     "data" : {
         "id" : "long, unique",
-        "campaignid" : "string"
+        "campaignId" : "string"
         "cliks" : "int",
         "exposure" : "int"
      }
@@ -614,7 +618,7 @@ Response :
     "data" : [
         {
             "id": "long, unique",
-            "campaignid": "long",
+            "campaignId": "long",
             "cliks": "int",
             "exposure": "int"
         }
@@ -629,7 +633,7 @@ Response :
     "data" : 
         {
             "id": "long, unique",
-            "campaignid": "long",
+            "campaignId": "long",
             "cliks": "int",
             "exposure": "int"
         }
@@ -643,7 +647,7 @@ Response :
     "data" : [
         {
             "id": "long, unique",
-            "campaignid": "long",
+            "campaignId": "long",
             "cliks": "int",
             "exposure": "int"
             "campaign": {
@@ -652,15 +656,13 @@ Response :
                 "startDate": "date",
                 "endDate": "date",
                 "subjectList": "int",
-                "advertiserId": "string",
-                "advertiser": [
+                "advertiserList": [
                     {
                         "id": "long, unique",
                         "name": "string"
                     }
                 ],
-                "adcontentId": "string",
-                "adcontent": [
+                "adcontentList": [
                     {
                         "id": "long, unique",
                         "content": "string",
@@ -693,14 +695,14 @@ Response :
                 "endDate": "date",
                 "subjectList": "int",
                 "advertiserId": "string",
-                "advertiser": [
+                "advertiserList": [
                     {
                         "id": "long, unique",
                         "name": "string"
                     }
                 ],
                 "adcontentId": "string",
-                "adcontent": [
+                "adcontentList": [
                     {
                         "id": "long, unique",
                         "content": "string",
@@ -725,7 +727,7 @@ Request :
 
 ```json 
 {
-    "campaignid" : "string"
+    "campaignId" : "string"
     "cliks" : "int",
     "exposure" : "int"
 }
@@ -737,7 +739,7 @@ Response :
     "code" : "number",
     "status" : "string",
     "data" : {
-            "campaignid" : "string"
+            "campaignId" : "string"
             "cliks" : "int",
             "exposure" : "int"
      }
