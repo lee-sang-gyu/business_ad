@@ -2,7 +2,8 @@ package com.business.ad.cotroller
 
 import com.business.ad.dto.CreateCampaignDTO
 import com.business.ad.dto.ReadCampaignDTO
-import com.business.ad.dto.ReadCampaignJoinAdDTO
+import com.business.ad.dto.ReadOnlyCampaignDTO
+//import com.business.ad.dto.ReadCampaignJoinAdDTO
 import com.business.ad.model.WebResponse
 import com.business.ad.service.CampaignService
 import org.springframework.beans.factory.annotation.Autowired
@@ -46,29 +47,13 @@ class CampaignController {
         )
     }
 
-    //모든 캠페인 정보 조회: 광고주, 광고내용 포함
+    //모든 캠페인 정보 조회: 광고주, 광고내용 제외
     @GetMapping(
-        value = ["/campaign_total"],
+        value = ["/campaign_only"],
         produces = ["application/json"]
     )
-    fun getAllCampaignJoinAd(): WebResponse<List<ReadCampaignJoinAdDTO>> {
-        val Response = campaignService.getCampaignJoinAd()
-        return WebResponse(
-            code = 200,
-            status = "OK",
-            data = Response
-        )
-    }
-
-    //캠페인 정보 Id로 조회: 광고주, 광고내용 포함
-    @GetMapping(
-        value = ["/campaign_total/{id}"],
-        produces = ["application/json"]
-    )
-    fun getCampaignJoinAdById(
-        @PathVariable(value = "id") campaignId: Long
-    ): WebResponse<ReadCampaignJoinAdDTO> {
-        val Response = campaignService.getCampaignJoinAdById(campaignId)
+    fun getAllCampaignJoinAd(): WebResponse<List<ReadOnlyCampaignDTO>> {
+        val Response = campaignService.getOnlyCampaign()
         return WebResponse(
             code = 200,
             status = "OK",

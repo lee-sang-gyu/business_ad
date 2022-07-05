@@ -9,7 +9,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface AdcontentRepository : JpaRepository<Adcontent, Long?> {
 
-    fun findAllBy(): List<Adcontent>
     fun findByContent(Content: String?): List<Adcontent>
-    fun findByIdIn(Id: List<Long>): List<Adcontent>
 }

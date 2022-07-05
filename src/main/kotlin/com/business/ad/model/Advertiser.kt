@@ -6,9 +6,10 @@ import javax.persistence.*
 import javax.validation.constraints.NotBlank
 
 //모델: 광고주 정보
+@Suppress("JpaAttributeTypeInspection")
 @Entity
 data class Advertiser(
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
     @get: NotBlank

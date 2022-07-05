@@ -2,24 +2,23 @@ package com.business.ad.model
 
 import com.business.ad.dto.CreateResultDTO
 import com.business.ad.dto.ReadResultDTO
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 //모델: 캠페인 결과
 @Entity
 data class Result(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
-    val campaignid: Long,
+    var campaignId: Long,
     var cliks: Int,
-    var exposure: Int
+    var exposure: Int/*,
+    @OneToOne(orphanRemoval = false)
+    val campaign: Campaign*/
 ){
     fun toReadResultDTO(): ReadResultDTO {
         return ReadResultDTO(
             id = id,
-            campaignid = campaignid,
+            campaignId = campaignId,
             cliks = cliks,
             exposure = exposure
         )
@@ -28,7 +27,7 @@ data class Result(
     fun toCreateResultDTO(): CreateResultDTO {
         return CreateResultDTO(
             id = id,
-            campaignid = campaignid,
+            campaignId = campaignId,
             cliks = cliks,
             exposure = exposure
         )

@@ -13,56 +13,33 @@ data class ReadCampaignDTO(
     val startDate: Date?,
     val endDate: Date?,
     val subjectList: Int?,
-    val advertiserId: String?,
-    val adcontentId: String?
+    val advertiserList: List<Advertiser>?,
+    val adcontentList: List<Adcontent>?
 )
-data class ViewCampaignDTO(
+
+data class ReadOnlyCampaignDTO(
     val id: Long? = null,
     val name: String,
     val startDate: Date?,
     val endDate: Date?,
     val subjectList: Int?
 )
-data class ViewCampaignAddContentDTO(
+data class ReadCampaignGetContentDTO(
     val id: Long? = null,
     val name: String,
     val startDate: Date?,
     val endDate: Date?,
     val subjectList: Int?,
-    val adcontent: List<Adcontent>?
+    val adcontentList: List<Adcontent>?
 )
-
-data class ReadCampaignJoinAdDTO(
-    val id: Long? = null,
-    val name: String,
-    val startDate: Date?,
-    val endDate: Date?,
-    val subjectList: Int?,
-    val advertiserId: String?,
-    var advertiser: List<Advertiser>?,
-    val adcontentId: String?,
-    val adcontent: List<Adcontent>?
-)
-
-data class ReadCampaignJoinAdcDTO(
-    val id: Long? = null,
-    val name: String,
-    val startDate: Date?,
-    val endDate: Date?,
-    val subjectList: Int?,
-    val advertiserId: String?,
-    val adcontentId: String?,
-    val adcontent: List<Adcontent>?
-)
-
 data class CreateCampaignDTO(
     val id: Long,
     val name: String,
     val startDate: Date?,
     val endDate: Date?,
     val subjectList: Int?,
-    val advertiserId: String?,
-    val adcontentId: String?
+    val advertiserList: MutableList<Advertiser>?,
+    val adcontentList: MutableList<Adcontent>?
 ) {
     fun toEnitty(): Campaign {
         return Campaign(
@@ -71,8 +48,8 @@ data class CreateCampaignDTO(
             startDate = startDate,
             endDate = endDate,
             subjectList = subjectList,
-            advertiserId = advertiserId,
-            adcontentId = adcontentId
+            advertiserList = advertiserList,
+            adcontentList = adcontentList
         )
     }
 }

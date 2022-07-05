@@ -3,9 +3,7 @@ package com.business.ad.service
 import com.business.ad.dto.*
 import com.business.ad.validation.ValidationUtil
 import com.business.ad.error.NotFoundException
-import com.business.ad.model.Adcontent
 import com.business.ad.model.Advertiser
-import com.business.ad.model.Campaign
 import com.business.ad.repository.AdcontentRepository
 import com.business.ad.repository.AdvertiserRepository
 import com.business.ad.repository.CampaignRepository
@@ -13,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.PathVariable
-import java.util.regex.Pattern
-
 
 //서비스: 광고주 정보
 @Component
@@ -50,17 +46,28 @@ class AdvertiserService {
     }
 
     //광고주 조회: 캠페인 포함
-    fun getAdvertiserByIdJoinCampaign(
+    fun getAdvertiserByIdGetCampaign(
         @PathVariable(value = "id") advertiserId: Long
-    ): ReadAdvertiserJoinCamapignDTO {
+    ): ReadAdvertiserGetCamapignDTO {
         val advertiser = findAdvertiserByIdOrThrowNotFound(advertiserId)
-        val like_adv: String = "%$" + advertiserId + "/%"
-        val campaign = campaignRepository.findByAdvertiserIdLike(like_adv)
-        return ReadAdvertiserJoinCamapignDTO(advertiser.id, advertiser.name, campaign.map { it.toViewCampaignDTO() })
+        val campaign = campaignRepository.findByAdvertiserListId(advertiserId)
+        return ReadAdvertiserGetCamapignDTO(advertiser.id, advertiser.name, campaign.map { it.toOnlyCampaignDTO() })
     }
 
+    //광고주 조회: 캠페인(광고내용) 포함
+    fun getAdvertiserByIdGetCampaignAndContent(
+        @PathVariable(value = "id") advertiserId: Long
+    ): ReadAdvertiserGetCamapignAndContentDTO {
+        val advertiser = findAdvertiserByIdOrThrowNotFound(advertiserId)
+        val campaign = campaignRepository.findByAdvertiserListId(advertiserId)
+
+        return ReadAdvertiserGetCamapignAndContentDTO(
+            advertiser.id,
+            advertiser.name,
+            campaign.map { it.toCampaignGetContentDTO() })
+    }
     //광고주 조회: 캠페인 포함 - 세부목록
-    fun getAdvertiserByIdJoinCampaignDetail(
+    /*fun getAdvertiserByIdJoinCampaignDetail(
         @PathVariable(value = "id") advertiserId: Long
     ): ReadAdvertiserJoinCamapignDetailDTO {
         val advertiser = findAdvertiserByIdOrThrowNotFound(advertiserId)
@@ -86,7 +93,7 @@ class AdvertiserService {
 
 
         return ReadAdvertiserJoinCamapignDetailDTO(advertiser.id, advertiser.name, campaignList)
-    }
+    }*/
 
     //광고주 변경
     fun updateAdvertiserById(
@@ -115,17 +122,17 @@ class AdvertiserService {
         }
     }
 
-    private fun convertCampaignResponse(
-        campaign: Campaign,
-        join_adcontent: List<Adcontent>
-    ): ViewCampaignAddContentDTO {
-        return ViewCampaignAddContentDTO(
-            id = campaign.id,
-            name = campaign.name,
-            startDate = campaign.startDate,
-            endDate = campaign.endDate,
-            subjectList = campaign.subjectList,
-            adcontent = join_adcontent
-        )
-    }
+    /* private fun convertCampaignResponse(
+         campaign: Campaign,
+         join_adcontent: List<Adcontent>
+     ): ViewCampaignAddContentDTO {
+         return ViewCampaignAddContentDTO(
+             id = campaign.id,
+             name = campaign.name,
+             startDate = campaign.startDate,
+             endDate = campaign.endDate,
+             subjectList = campaign.subjectList,
+             adcontent = join_adcontent
+         )
+     }*/
 }

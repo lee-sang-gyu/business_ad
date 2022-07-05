@@ -4,12 +4,10 @@ import com.business.ad.dto.CreateAdcontentDTO
 import com.business.ad.dto.ReadAdcontentDTO
 import com.business.ad.error.NotFoundException
 import com.business.ad.model.Adcontent
-import com.business.ad.model.Advertiser
 import com.business.ad.repository.AdcontentRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
-import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.PathVariable
 
 //서비스: 광고 내용
@@ -46,10 +44,26 @@ class AdcontentService {
         val existingAdcontent = findAdcontentByIdOrThrowNotFound(adcontentId)
 
         var updatedAdcontent = existingAdcontent.copy(
-            content = createAdcontentDTO.content,
-            image_url = createAdcontentDTO.image_url,
-            btn_text = createAdcontentDTO.btn_text,
-            btn_url = createAdcontentDTO.btn_url
+            content = if (createAdcontentDTO.content == null) {
+                existingAdcontent.content
+            } else {
+                createAdcontentDTO.content
+            },
+            image_url = if (createAdcontentDTO.image_url == null) {
+                existingAdcontent.image_url
+            } else {
+                createAdcontentDTO.image_url
+            },
+            btn_text = if (createAdcontentDTO.btn_text == null) {
+                existingAdcontent.btn_text
+            } else {
+                createAdcontentDTO.btn_text
+            },
+            btn_url = if (createAdcontentDTO.btn_url == null) {
+                existingAdcontent.btn_url
+            } else {
+                createAdcontentDTO.btn_url
+            }
         )
         val advertiser = adcontentRepository.save(updatedAdcontent.toCreateAdContentDTO().toEnitty())
         return advertiser.toReadAdcontentDTO()
@@ -94,6 +108,7 @@ class AdcontentService {
             return adcontent;
         }
     }
+
     private fun findAdcontentByContentOrThrowNotFound(content: String): List<Adcontent> {
         val adcontent = adcontentRepository.findByContent(content)
         if (adcontent == null) {

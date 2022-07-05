@@ -63,23 +63,24 @@ class AdvertiserController {
         value = ["/advertiser/{id}/campaign"],
         produces = ["application/json"]
     )
-    fun getAdvertiserJoinCampaignById(@PathVariable(value = "id") advertiserId: Long)
-            : WebResponse<ReadAdvertiserJoinCamapignDTO> {
-        val Response = advertiserService.getAdvertiserByIdJoinCampaign(advertiserId)
+    fun getAdvertiserByIdGetCampaign(@PathVariable(value = "id") advertiserId: Long)
+            : WebResponse<ReadAdvertiserGetCamapignDTO> {
+        val Response = advertiserService.getAdvertiserByIdGetCampaign(advertiserId)
         return WebResponse(
             code = 200,
             status = "OK",
             data = Response
         )
     }
-    //조회: 캠페인정보 포함 - 세부목록
+
+    //조회: 캠페인정보(광고내용) 포함
     @GetMapping(
         value = ["/advertiser/{id}/campaign_detail"],
         produces = ["application/json"]
     )
-    fun getAdvertiserByIdJoinCampaignDetail(@PathVariable(value = "id") advertiserId: Long)
-            : WebResponse<ReadAdvertiserJoinCamapignDetailDTO> {
-        val Response = advertiserService.getAdvertiserByIdJoinCampaignDetail(advertiserId)
+    fun getAdvertiserByIdGetCampaignAndContent(@PathVariable(value = "id") advertiserId: Long)
+            : WebResponse<ReadAdvertiserGetCamapignAndContentDTO> {
+        val Response = advertiserService.getAdvertiserByIdGetCampaignAndContent(advertiserId)
         return WebResponse(
             code = 200,
             status = "OK",

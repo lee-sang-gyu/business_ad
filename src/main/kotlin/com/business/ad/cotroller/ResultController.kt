@@ -2,11 +2,10 @@ package com.business.ad.cotroller
 
 import com.business.ad.dto.CreateResultDTO
 import com.business.ad.dto.ReadResultDTO
-import com.business.ad.dto.ReadResultJoinCampaignDTO
+import com.business.ad.dto.ReadResultGetCampaignDTO
 import com.business.ad.model.WebResponse
 import com.business.ad.service.ResultService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 //컨트롤러: 캠페인 결과
@@ -35,8 +34,8 @@ class ResultController {
         value = ["/result_total"],
         produces = ["application/json"]
     )
-    fun getAllResultJoinCampaign(): WebResponse<List<ReadResultJoinCampaignDTO>> {
-        val Response = resultService.getResultJoinCampaign()
+    fun getAllResultJoinCampaign(): WebResponse<List<ReadResultGetCampaignDTO>> {
+        val Response = resultService.getResultGetCampaign()
         return WebResponse(
             code = 200,
             status = "OK",
@@ -64,10 +63,10 @@ class ResultController {
         value = ["/result_total/{id}"],
         produces = ["application/json"]
     )
-    fun getResultJoinCampaignById(
+    fun getResultGetCampaignById(
         @PathVariable(value = "id") resultId: Long
-    ): WebResponse<ReadResultJoinCampaignDTO> {
-        val Response = resultService.getResultJoinCampaignById(resultId)
+    ): WebResponse<ReadResultGetCampaignDTO> {
+        val Response = resultService.getResultByIdGetCampaign(resultId)
         return WebResponse(
             code = 200,
             status = "OK",
